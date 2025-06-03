@@ -7,8 +7,8 @@ namespace GenericRepositoryApp.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Point> Points { get; set; }
-        public DbSet<AnotherEntity> AnotherEntities { get; set; }  // Eklenen diğer entity'ler
+        public DbSet<Point> Points { get; set; } = null!;
+        public DbSet<AnotherEntity> AnotherEntities { get; set; } = null!;  // Eklenen diğer entity'ler
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
