@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// PostgreSQL bağlantısını ekleyin
+// PostgreSQL baÄŸlantÄ±sÄ±nÄ± ekleyin
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// CORS ayarlarını ekliyoruz
+// CORS ayarlarÄ±nÄ± ekliyoruz
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-// DI için servisleri ekleyin
+// DI iÃ§in servisleri ekleyin
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); // Unit of Work ekleniyor
 builder.Services.AddScoped<PointService>(); // PointService ekleniyor
@@ -30,20 +30,20 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Veritabanı bağlantısını kontrol etmek için try-catch bloğu ekleyin
+// VeritabanÄ± baÄŸlantÄ±sÄ±nÄ± kontrol etmek iÃ§in try-catch bloÄŸu ekleyin
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     try
     {
-        // Veritabanı bağlantısını kontrol etmek için basit bir sorgu çalıştırıyoruz
+        // VeritabanÄ± baÄŸlantÄ±sÄ±nÄ± kontrol etmek iÃ§in basit bir sorgu Ã§alÄ±ÅŸtÄ±rÄ±yoruz
         await dbContext.Database.OpenConnectionAsync();
         await dbContext.Database.CloseConnectionAsync();
-        Console.WriteLine("Veritabanına bağlantı başarılı.");
+        Console.WriteLine("VeritabanÄ±na baÄŸlantÄ± baÅŸarÄ±lÄ±.");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Veritabanına bağlantı başarısız: {ex.Message}");
+        Console.WriteLine($"VeritabanÄ±na baÄŸlantÄ± baÅŸarÄ±sÄ±z: {ex.Message}");
     }
 }
 
@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// CORS'u kullanıyoruz
+// CORS'u kullanÄ±yoruz
 app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
