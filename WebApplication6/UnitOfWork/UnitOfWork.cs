@@ -16,6 +16,9 @@ public class UnitOfWork : IUnitOfWork
     private IGenericRepository<AnotherEntity>? _anotherEntityRepository;
     public IGenericRepository<AnotherEntity> AnotherEntities => _anotherEntityRepository ??= new GenericRepository<AnotherEntity>(_context);
 
+    private IGenericRepository<User>? _userRepository;
+    public IGenericRepository<User> Users => _userRepository ??= new GenericRepository<User>(_context);
+
     public async Task<int> CompleteAsync()
     {
         return await _context.SaveChangesAsync(); // Tüm değişiklikleri kaydet
